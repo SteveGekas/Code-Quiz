@@ -1,3 +1,24 @@
-/*body {
-    background-color: yellow;
-}*/
+h1 {
+    text-align: center;
+    padding-top: 200px;
+}
+
+p {
+    text-align: center;
+}
+
+#start {
+    text-align: center;
+    margin: auto;
+    display: flex;
+    background-color: purple;
+    color: white;
+}
+
+#scores {
+    float: left;
+}
+
+span {
+    float: right;
+}
