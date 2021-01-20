@@ -1,4 +1,27 @@
-var quiz = [
+
+var start = document.querySelector("#start");
+var currentTime = document.querySelector("#currentTime");
+var quiz = document.querySelector("#quiz")
+var seconds = 61;
+var done = 0;
+
+
+start.addEventListener("click", function () {
+    //alert("WORK PLEASE");
+    if (done === 0) {
+        holdInterval = setInterval(function () {
+            seconds--;
+            currentTime.textContent = "Time: " + seconds;
+
+            if (seconds <= 0) {
+                clearInterval(done);
+                currentTime.textContent = "GAME OVER";
+            }
+        }, 1000);
+    }
+});
+
+var quizQuestions = [
     {
         question: "Which of the following is not JavaScript Data Types?",
         choices: ["Undefined", "Number", "Boolean", "Float"],
@@ -42,27 +65,47 @@ var quiz = [
     }
 ];
 
-
 var questionsAsked = 0;
 var score = 0;
 var data = 0;
-var currentTime = document.querySelector("#start");
-var timer = document.querySelector("#currentTime");
-var seconds = 61;
-var done = 0;
 
+function render(questionsAsked) {
+    quiz.innerHTML = "";
+    ul.innerHTML = "";
 
-currentTime.addEventListener("click", function () {
-    //alert("WORK PLEASE");
-    if (done === 0) {
-        holdInterval = setInterval(function () {
-            seconds--;
-            timer.textContent = "Time: " + seconds;
-
-            if (seconds <= 0) {
-                clearInterval(done);
-                timer.textContent = "GAME OVER";
-            }
-        }, 1000);
+    for (var i = 0; i < quizQuestions.length; i++) {
+        var UseQuestion = quizQuestions[questionsAsked].question;
+        var UseChoice = quizQuestions[questionsAsked].choices;
+        quiz.textContent = UseQuestion;
     }
-});
+
+    UseChoice.forEach(function (next) {
+        var item = document.createElement("li");
+        item.textContent = next;
+        quiz.appendChild(ul);
+        ul.appendChild(next);
+        item.addEventListener("click", (check));
+    })
+
+}
+
+function check(event) {
+    var UseAnswers = event.target;
+    
+    if (UseAnswers.matches("li")) {
+        var newDiv = document.createElement("div");
+        newDiv.setAttribute("id", newDiv)
+
+        if (UseAnswers.textContent === quizQuestions[questionsAsked].correct) {
+            score++;
+            newDiv.textContent = "CORRECT!";
+        }
+        else {
+            seconds = seconds - 10;
+            newDiv.textContent = "INCORRECT, the answer is " + quizQuestions[questionsAsked].correct;
+        }
+    }
+    questionsAsked++;
+
+
+}
