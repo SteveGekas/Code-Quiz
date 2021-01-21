@@ -10,18 +10,22 @@
 </head>
 
 <body>
-    <link id="scores">High Scores</link>
+    <a href="HighScores.html">High Scores</a>
 
-    <span>Time: <link id = "time">60</link></span>
+    <div id="container">
 
-    <div id="quiz">
-        <h1>Coding Quiz Challenge</h1>
-        <p>Try to answer the following code-related questions within the time limit.<br>
-            Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+        <div id="currentTime"><span>Time: </span></div>
+
+        <div id="quiz">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time limit.<br>
+                Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+            <ul></ul>
+        </div>
+
     </div>
 
     <button id="start">Start Quiz</button>
-
 
     <script src="./script.js"></script>
 </body>

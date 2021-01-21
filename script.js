@@ -91,10 +91,10 @@ function render(questionsAsked) {
 
 function check(event) {
     var UseAnswers = event.target;
-    
+
     if (UseAnswers.matches("li")) {
         var newDiv = document.createElement("div");
-        newDiv.setAttribute("id", newDiv)
+        newDiv.setAttribute("id", "newDiv");
 
         if (UseAnswers.textContent === quizQuestions[questionsAsked].correct) {
             score++;
@@ -107,5 +107,67 @@ function check(event) {
     }
     questionsAsked++;
 
+    if (questionsAsked >= quizQuestions.length) {
+        newDiv.textContent = "Score: " + score;
+    }
+    else {
+        render(questionsAsked);
+    }
+
+    quiz.appendChild(newDiv);
+
+    var paragraph = document.createElement("p");
+    paragraph.setAttribute("id", "paragraph");
+    quiz.appendChild.apply(paragraph);
+
+    if (seconds >= 0) {
+        var timeLeft = seconds;
+        clearInterval(holdInterval);
+        if (timeLeft === undefined) {
+            timeLeft = 0;
+        }
+    }
+
+    var label = document.createElement("label");
+    label.setAttribute("id", "label");
+    label.textContent = "Enter your initials ";
+    quiz.appendChild(label);
+
+    var initials = document.createElement("initials");
+    initials.setAttribute("type", "text");
+    initials.setAttribute("id", "initials");
+    initials.textContent = "";
+    quiz.appendChild(initials);
+
+    var subInit = document.createElement("button");
+    subInit.setAttribute("type", "Submit");
+    subInit.setAttribute("id", "Submit");
+    subInit.textContent = "Submit";
+    quiz.appendChild(subInit);
+
+    subInit.addEventListener("click", function () {
+        var inits = initials.value;
+        var finScore = {
+            initials: inits,
+            score: timeLeft
+        }
+
+        var highScore = localStorage.getItem("highScore");
+
+        if (highScore === null) {
+            highScore = []
+        }
+        else {
+            highScore = JSON.parse(highScore);
+        }
+
+        if (finScore.score === undefined) {
+            finScore.score = 0;
+        }
+        highScore.push(finScore);
+        var topScore = JSON.stringify(finScore);
+        localStorage.setItem("highScore", topScore);
+        window.location.replace("highScores.html")
+    });
 
 }

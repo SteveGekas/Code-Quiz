@@ -15,10 +15,11 @@ p {
     color: white;
 }
 
-#scores {
+a {
     float: left;
+    text-decoration: none;
 }
 
-span {
+#currentTime {
     float: right;
 }
